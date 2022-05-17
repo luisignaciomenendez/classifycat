@@ -80,7 +80,7 @@ def cli(infile, new,os):
         x = click.prompt(
             'Do you want to open the url? [y|n] ', default='y')
         if x in ['y'] and df['url'][i] != []:
-            webbrowser.open(protesters_top.url[i][0], new=2)
+            webbrowser.open(df.url[i][0], new=2)
             time.sleep(10)
             pyautogui.hotkey(key, 'w')
             time.sleep(1)
