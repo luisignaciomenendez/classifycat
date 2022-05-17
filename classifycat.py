@@ -119,7 +119,7 @@ def cli(infile, new,os):
         click.secho(
             ' 1=For democracy \n 2=For independence \n 3=For catalan government', fg='green')
         click.secho(
-            ' 4=Against spanish gov \n 5= Against police \n 6=Against spanish institutions', fg='orange')
+            ' 4=Against spanish gov \n 5= Against police \n 6=Against spanish institutions', fg='red')
         click.secho(
             ' 7=Against referendum/voting \n 8= Against independence \n 9=Against catalan gov', fg='red')
         click.secho(
