@@ -1,7 +1,8 @@
 ## %% import packages:
 import webbrowser
-from wcwidth import wcswidth
 import time
+from wcwidth import wcswidth
+import datetime
 import json
 import html
 import importlib
@@ -30,15 +31,22 @@ click.clear()
 #  required=True, prompt='What is the file you want to apply the ranom forest to?')
 @click.argument("infile", type=str, required=True)
 #@click.argument('wvmodel', type=str, required=False, default='trained_wash_minn.model')
-@click.option('--new', type=bool, is_flag=True, default=False, show_default=True)
+@click.option('--new', help='If you are classiying new data', is_flag=True, required=False, default=False, show_default=True)
+@click.option('--os', help='your operating system[windows|mac]. default=windows', type=str, required=False, default='windows', show_default=True)
 # @click.argument("protfile", type=click.File("w", encoding="txt"), default="-")
 # @click.argument("nonprotfile", type=click.File("w", encoding="txt"), default="-")
 ## %% Click definition :
-def cli(infile,
-        new):
+##
+#infile = 'cat_esp_twitter500'
+#new = False
+def cli(infile, new):
     df = pd.read_csv(f'./{infile}.csv', low_memory=False)
     click.secho(f'The  file {infile} is being processed',
                 fg='yellow', bg='red', bold=True)
+    if os == 'mac':
+        key = 'command'
+    elif os == 'windows':
+        key = 'ctrl'
     if new:
         existing = pd.read_csv(f'./classified/{infile}_coded.csv')
         last = existing['id'].iloc[-1]
@@ -74,9 +82,9 @@ def cli(infile,
         if x in ['y'] and df['url'][i] != []:
             webbrowser.open(protesters_top.url[i][0], new=2)
             time.sleep(10)
-            pyautogui.hotkey('command', 'w')
+            pyautogui.hotkey(key, 'w')
             time.sleep(1)
-            pyautogui.hotkey('command', 'tab')
+            pyautogui.hotkey(key, 'tab')
             time.sleep(1)
         click.secho('--Language--| 0=Other | 1=Cat | 2=Esp | 3=Both |',
                     fg='blue', bg='white')
@@ -193,10 +201,8 @@ def _text(tweet, i, width=75):
     body.append(
         _border(
             click.style(
-                '@' +
-                 ' - '
-                ,
-                fg='yellow'
+                '@'
+                + ' - ',                fg='yellow'
             ),
             width
         )
@@ -228,6 +234,10 @@ def _text(tweet, i, width=75):
         created = ''
     #m = tweet['public_metrics'][i]
     metrics = (
+        f'♡'
+        f'♺'
+        f'↶'
+        f'«'
     )
 
     padding = (width - 4 - wcswidth(created + metrics)) * ' '
