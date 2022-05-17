@@ -1,9 +1,9 @@
 from setuptools import setup
 
 setup(
-    name="catalan-classifier",
+    name="classifycat",
     version='0.1',
-    py_modules=['classify'],
+    py_modules=['classifycat'],
     author='Luis I. Menéndez | luisigmenendez@gmail.com',
     install_requires=[
         'Click',
@@ -16,7 +16,7 @@ setup(
     # ''',
     entry_points={
             "console_scripts": [
-                "classifycat = catalan-classifier.command:classifycat",
+                "classifycat = classifycat.command:classifycat",
             ]
         },
 )
