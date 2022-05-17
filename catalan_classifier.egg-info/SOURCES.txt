@@ -1,0 +1,7 @@
+setup.py
+catalan_classifier.egg-info/PKG-INFO
+catalan_classifier.egg-info/SOURCES.txt
+catalan_classifier.egg-info/dependency_links.txt
+catalan_classifier.egg-info/entry_points.txt
+catalan_classifier.egg-info/requires.txt
+catalan_classifier.egg-info/top_level.txt
