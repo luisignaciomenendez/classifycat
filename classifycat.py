@@ -1,6 +1,6 @@
 ## %% import packages:
 import webbrowser
-import wcswidth
+from wcwidth import wcswidth
 import time
 import importlib
 import importlib.util
