@@ -39,7 +39,7 @@ click.clear()
 ##
 #infile = 'cat_esp_twitter500'
 #new = False
-def cli(infile, new):
+def cli(infile, new,os):
     df = pd.read_csv(f'./{infile}.csv', low_memory=False)
     click.secho(f'The  file {infile} is being processed',
                 fg='yellow', bg='red', bold=True)
