@@ -15,8 +15,8 @@ setup(
     #     retrain=retrain:cli
     # ''',
     entry_points={
-        'console_scripts': [
-            'classifycat=classifycat:cli'
-        ],
-    },
+            "console_scripts": [
+                "classifycat = catalan-classifier.command:classifycat",
+            ]
+        },
 )
