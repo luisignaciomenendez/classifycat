@@ -225,10 +225,6 @@ def _text(tweet, i, width=75):
         created = ''
     #m = tweet['public_metrics'][i]
     metrics = (
-        f'♡ {}  '
-        f'♺ {}  '
-        f'↶ {}  '
-        f'« {}'
     )
 
     padding = (width - 4 - wcswidth(created + metrics)) * ' '
