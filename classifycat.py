@@ -33,7 +33,7 @@ click.clear()
 ## %% Click definition :
 def cli(infile,
         new):
-    df = pd.read_csv(f'./{infile}', low_memory=False)
+    df = pd.read_csv(f'./{infile}.csv', low_memory=False)
     click.secho(f'The  file {infile} is being processed',
                 fg='yellow', bg='red', bold=True)
     if new:
