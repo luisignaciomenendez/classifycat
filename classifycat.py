@@ -28,42 +28,41 @@ click.clear()
 @click.argument("infile", type=str, required=True)
 #@click.argument('wvmodel', type=str, required=False, default='trained_wash_minn.model')
 @click.option('--new', type=str, required=False, default='trained_full_04_04.model', show_default=True)
-
 # @click.argument("protfile", type=click.File("w", encoding="txt"), default="-")
 # @click.argument("nonprotfile", type=click.File("w", encoding="txt"), default="-")
 ## %% Click definition :
 def cli(infile,
         new):
-    df = pd.read_csv(cd+infile+'.csv', low_memory=False)
+    df = pd.read_csv(f'./{infile}', low_memory=False)
     click.secho(f'The  file {infile} is being processed',
-        fg='yellow', bg='red', bold=True)
+                fg='yellow', bg='red', bold=True)
     if new:
-        existing=pd.read_csv(f'{cd}/classified/{infile}_coded.csv')
-        last=existing['id'].iloc[-1]
+        existing = pd.read_csv(f'./classified/{infile}_coded.csv')
+        last = existing['id'].iloc[-1]
         click.secho(f'Starting classification where you left it, in id {last}',
-            fg='yellow', bg='red', bold=True)
-        df=existing['id'].loc[last:].reset_index()
-        
-        
+                    fg='yellow', bg='red', bold=True)
+        df = existing['id'].loc[last:].reset_index()
+
     print('---------------------------------')
     print('---------------------------------')
     click.secho('The shape of the  data is '
                 + str(df.shape), fg='blue', bg='white')
     init_len = len(df)
     df['url'] = df['text'].apply(lambda x: re.findall(
-    "http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+", x))
+        "http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+", x))
     df = df.reset_index()
     df['lang'] = ""
     df['text1'] = ""
     df['text2'] = ""
     df['image'] = ""
     df['video'] = ""
-        
+
     check = click.prompt(
-                f'Do you want to store the file {cd}/classified/{infile}_coded.csv  [y|n]', default='n')
+                f'Do you want to store the file ./classified/{infile}_coded.csv  [y|n]', default='n')
     if check == 'n':
         exit()
-    how_many = click.prompt('How many tweets do you want to classify? Default=all', default=len(df))
+    how_many = click.prompt(
+        'How many tweets do you want to classify? Default=all', default=len(df))
     for i in range(0, how_many):
         print(_text(df, i))
         #print(protesters_top['text'][i])
@@ -76,47 +75,54 @@ def cli(infile,
             time.sleep(1)
             pyautogui.hotkey('command', 'tab')
             time.sleep(1)
-        click.secho('--Language--| 0=Other | 1=Cat | 2=Esp | 3=Both |',fg='blue',bg='white')
-        y1= click.prompt(
+        click.secho('--Language--| 0=Other | 1=Cat | 2=Esp | 3=Both |',
+                    fg='blue', bg='white')
+        y1 = click.prompt(
             'Whats the tweets language?[0,1,2,3]')
         #pyautogui.hotkey('command','alt','f')
         df['lang'][i] = y1
         print('-'*80)
         print('-'*80)
-        click.secho('--Image content-- | 0=None | 1=Peaceful | 2=Violent | 3=Unrelated',fg='blue',bg='white')
-        y2= click.prompt(
+        click.secho(
+            '--Image content-- | 0=None | 1=Peaceful | 2=Violent | 3=Unrelated', fg='blue', bg='white')
+        y2 = click.prompt(
             'Hows the image content?[0,1,2,3]', type=int)
         df['image'][i] = y2
         print('-'*80)
         print('-'*80)
-        click.secho('--Video content-- | 0=None | 1=Peaceful | 2=Violent | 3=Unrelated',fg='blue',bg='white')
-        y3= click.prompt(
+        click.secho(
+            '--Video content-- | 0=None | 1=Peaceful | 2=Violent | 3=Unrelated', fg='blue', bg='white')
+        y3 = click.prompt(
             'Hows the video content?[0,1,2,3]', type=int)
         df['video'][i] = y3
         print('-'*80)
         print('-'*80)
-        click.secho('--TEXT CONTENT 1-- | 0=Unrelated | 1=Peaceful | 2=Violent | 3=Neutral',fg='red',bg='white')
-        y4= click.prompt(
+        click.secho(
+            '--TEXT CONTENT 1-- | 0=Unrelated | 1=Peaceful | 2=Violent | 3=Neutral', fg='red', bg='white')
+        y4 = click.prompt(
             'Hows the text1 content?[0,1,2,3]', type=int)
         df['text1'][i] = y4
         print('-'*80)
         print('-'*80)
         click.secho('0=Unrelated')
-        click.secho(' 1=For democracy \n 2=For independence \n 3=For catalan government', fg='green')
-        click.secho(' 4=Against spanish gov \n 5= Against police \n 6=Against spanish institutions', fg='orange')
-        click.secho(' 7=Against referendum/voting \n 8= Against independence \n 9=Against catalan gov', fg='red')
-        click.secho(' 10=For spanish gov \n 11= For police \n 12=For spanish institutions', fg='blue')
+        click.secho(
+            ' 1=For democracy \n 2=For independence \n 3=For catalan government', fg='green')
+        click.secho(
+            ' 4=Against spanish gov \n 5= Against police \n 6=Against spanish institutions', fg='orange')
+        click.secho(
+            ' 7=Against referendum/voting \n 8= Against independence \n 9=Against catalan gov', fg='red')
+        click.secho(
+            ' 10=For spanish gov \n 11= For police \n 12=For spanish institutions', fg='blue')
         click.secho('13=Sadness')
-        y5= click.prompt(
+        y5 = click.prompt(
             'Hows the text2 content?[0,1,2,3,...,13]', type=int)
         df['text2'][i] = y5
         df.to_csv(
-            f'{cd}/classified/{infile}_coded.csv', index=False)
-    
+            f'./classified/{infile}_coded.csv', index=False)
+
         print('-'*80)
         print('-'*80)
-        
-        
+
 
 #
 #
