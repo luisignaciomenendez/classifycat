@@ -2,6 +2,8 @@
 import webbrowser
 from wcwidth import wcswidth
 import time
+import json
+import html
 import importlib
 import importlib.util
 from collections import Counter
