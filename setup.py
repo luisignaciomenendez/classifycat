@@ -14,9 +14,9 @@ setup(
     #     classify=classify:cli
     #     retrain=retrain:cli
     # ''',
-    entry_points={
-            "console_scripts": [
-                "classifycat = classifycat.command:classifycat",
-            ]
-        },
+   entry_points={
+        'console_scripts': [
+            'classifycat=classifycat:cli'
+        ],
+    },
 )
