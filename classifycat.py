@@ -27,7 +27,7 @@ click.clear()
 #  required=True, prompt='What is the file you want to apply the ranom forest to?')
 @click.argument("infile", type=str, required=True)
 #@click.argument('wvmodel', type=str, required=False, default='trained_wash_minn.model')
-@click.option('--new', type=str, required=False, default='trained_full_04_04.model', show_default=True)
+@click.option('--new', type=flag, required=False, default=False, show_default=True)
 # @click.argument("protfile", type=click.File("w", encoding="txt"), default="-")
 # @click.argument("nonprotfile", type=click.File("w", encoding="txt"), default="-")
 ## %% Click definition :
