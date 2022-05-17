@@ -18,7 +18,7 @@ import pickle
 import click
 import pyautogui
 # Since it doesnt work I try to import from miniforge
-
+pd.options.mode.chained_assignment = None
 click.clear()
 
 # If commands are not detected use : source ~/.bash_profile
