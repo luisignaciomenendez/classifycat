@@ -59,7 +59,7 @@ def cli(infile, new,os):
         # last = existing['index'].iloc[-1]
         click.secho(f'Starting classification where you left it, in row {last}',
                     fg='yellow', bg='red', bold=True)
-        df = existing.loc[last:]
+        df = existing.loc[last+1:]
         infile = click.prompt(
             'Name to store the new file [name without .csv]')
 
