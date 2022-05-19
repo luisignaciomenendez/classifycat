@@ -69,7 +69,7 @@ def cli(infile, new,os):
     init_len = len(df)
     df['url'] = df['text'].apply(lambda x: re.findall(
         "http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+", x))
-    df = df.reset_index()
+    df = df.reset_index(drop=True)
     df['lang'] = ""
     df['text1'] = ""
     df['text2'] = ""
