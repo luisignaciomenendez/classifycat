@@ -50,17 +50,18 @@ def cli(infile, new,os):
     if new:
         click.secho('YOU ARE ABOUT TO RE-START CLASSIFICATION OF AN OLD FILE')
         old_file = click.prompt(
-                'Whats the name of the old file?[name without .csv]', bg='white', fg='blue')
+            'Whats the name of the old file?[name without .csv]')
+        #old_file = 'cat_esp_twitter500_coded.csv'
         existing = pd.read_csv(
-            f'./classified/{old_file}.csv')
-        last = click.secho('What is the last row you classified?',
-                           type=int, bg='white', fg='blue')
+            f'./python_codes/classifycat/classified/{old_file}.csv')
+        last = click.prompt('What is the last row you classified?',
+                            type=int)
         # last = existing['index'].iloc[-1]
         click.secho(f'Starting classification where you left it, in row {last}',
                     fg='yellow', bg='red', bold=True)
         df = existing.loc[last:].reset_index()
-        infile = click.secho(
-            'Name to store the new file [name without .csv]', bg='white', fg='blue')
+        infile = click.prompt(
+            'Name to store the new file [name without .csv]')
 
     print('---------------------------------')
     print('---------------------------------')
