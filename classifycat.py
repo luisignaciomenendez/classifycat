@@ -48,11 +48,20 @@ def cli(infile, new,os):
     elif os == 'windows':
         key = 'ctrl'
     if new:
-        existing = pd.read_csv(f'./classified/{infile}_coded.csv')
-        last = existing['id'].iloc[-1]
-        click.secho(f'Starting classification where you left it, in id {last}',
+        click.secho('YOU ARE ABOUT TO RE-START CLASSIFICATION OF AN OLD FILE')
+        old_file = click - \
+            prompt(
+                'Whats the name of the old file?[name without .csv]', bg='white', fg='blue')
+        existing = pd.read_csv(
+            f'./classified/{old_file}.csv')
+        last = click.secho('What is the last row you classified?',
+                           type=int, bg='white', fg='blue')
+        # last = existing['index'].iloc[-1]
+        click.secho(f'Starting classification where you left it, in row {last}',
                     fg='yellow', bg='red', bold=True)
-        df = existing['id'].loc[last:].reset_index()
+        df = existing.loc[last:].reset_index()
+        infile = click.secho(
+            'Name to store the new file [name without .csv]', bg='white', fg='blue')
 
     print('---------------------------------')
     print('---------------------------------')
