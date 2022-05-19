@@ -50,8 +50,7 @@ def cli(infile, new,os):
     if new:
         click.secho('YOU ARE ABOUT TO RE-START CLASSIFICATION OF AN OLD FILE')
         old_file = click.prompt(
-            'Whats the name of the old file?[name without .csv]')
-        #old_file = 'cat_esp_twitter500_coded.csv'
+            'Whats the name of the old file coded?[name without .csv]')
         existing = pd.read_csv(
             f'./classified/{old_file}.csv')
         last = click.prompt('What is the last row you classified?',
