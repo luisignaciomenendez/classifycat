@@ -49,8 +49,7 @@ def cli(infile, new,os):
         key = 'ctrl'
     if new:
         click.secho('YOU ARE ABOUT TO RE-START CLASSIFICATION OF AN OLD FILE')
-        old_file = click - \
-            prompt(
+        old_file = click.prompt(
                 'Whats the name of the old file?[name without .csv]', bg='white', fg='blue')
         existing = pd.read_csv(
             f'./classified/{old_file}.csv')
